@@ -16,7 +16,7 @@ const images = [
 const makeListPicture = ({ url, alt }) => {
   return `
   <li class = gallery__item >
-  <img class = gallery__img src = ${url} alt = ${alt} />
+  <img class = gallery__img src = ${url} alt = "${alt}" />
   </li>
   `;
 };
@@ -24,7 +24,5 @@ const makeListPicture = ({ url, alt }) => {
 const galleryEl = document.querySelector(".gallery");
 
 const makeTransactionRole = images.map(makeListPicture).join("");
-
-// console.log(makeTransactionRole);
 
 galleryEl.insertAdjacentHTML("afterbegin", makeTransactionRole);

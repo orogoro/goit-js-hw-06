@@ -2,8 +2,6 @@ function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
 
-/// Сделал вместе с Гуглом, очень было интересно решить задачу
-
 const refs = {
   createBtn: document.querySelector("[data-create]"),
   destroyBtn: document.querySelector("[data-destroy]"),
@@ -19,13 +17,17 @@ function getAmount() {
 
 function createBoxes(amount) {
   let basicSize = 30;
+  let size = 0;
   let fragment = document.createDocumentFragment();
+
   for (let i = 0; i < amount; i++) {
-    let size = basicSize + i * 10;
+    size = basicSize + i * 10;
+
     let div = document.createElement("div");
     div.style.cssText = `width: ${size}px; height: ${size}px; background-color: ${getRandomHexColor()}`;
     fragment.append(div);
   }
+
   document.querySelector("#boxes").append(fragment);
 }
 
