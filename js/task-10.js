@@ -3,34 +3,30 @@ function getRandomHexColor() {
 }
 
 const refs = {
+  inputEl: document.querySelector("input"),
   createBtn: document.querySelector("[data-create]"),
   destroyBtn: document.querySelector("[data-destroy]"),
+  boxesEl: document.querySelector("#boxes"),
 };
 
-refs.createBtn.addEventListener("click", getAmount);
+refs.createBtn.addEventListener("click", () => {
+  createBoxes(refs.inputEl.value);
+});
 refs.destroyBtn.addEventListener("click", destroyBoxes);
 
-function getAmount() {
-  let amount = +document.querySelector("#controls input").value;
-  createBoxes(amount);
-}
+const INITIAL_BOX_SIZE = 30;
+const BOX_SIZE_STEP = 10;
+let basicSize = INITIAL_BOX_SIZE;
 
 function createBoxes(amount) {
-  let basicSize = 30;
-  let size = 0;
-  let fragment = document.createDocumentFragment();
-
-  for (let i = 0; i < amount; i++) {
-    size = basicSize + i * 10;
-
-    let div = document.createElement("div");
-    div.style.cssText = `width: ${size}px; height: ${size}px; background-color: ${getRandomHexColor()}`;
-    fragment.append(div);
+  for (let i = 1; i <= amount; i++) {
+    let div = `<div style= "width: ${basicSize}px; height: ${basicSize}px; background-color: ${getRandomHexColor()}"> </div>`;
+    refs.boxesEl.insertAdjacentHTML("beforeend", div);
+    basicSize += BOX_SIZE_STEP;
   }
-
-  document.querySelector("#boxes").append(fragment);
 }
 
 function destroyBoxes() {
+  basicSize = INITIAL_BOX_SIZE;
   document.querySelector("#boxes").innerHTML = "";
 }
